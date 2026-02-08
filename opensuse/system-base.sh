@@ -17,7 +17,7 @@ zypper dup -y
 # 3. Base utilities
 zypper install -y --no-recommends \
     unrar 7zip git bash-completion ffmpeg-4 \
-    zram-generator ucode-amd kernel-firmware-amdgpu
+    zram-generator ucode-amd kernel-firmware-amdgpu sensors
 
 # 4. System stability (16GB zRAM)
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf

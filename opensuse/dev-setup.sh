@@ -15,7 +15,20 @@ zypper --gpg-auto-import-keys refresh
 # 2. Development SDKs and IDE
 zypper install -y --no-recommends \
     dotnet-sdk-10.0 code \
-    podman podman-compose
+    podman podman-compose \
+    cockpit cockpit-podman tuned tuned-utils cockpit-system
+
+# Enable and start services
+systemctl enable --now cockpit.socket
+systemctl enable --now tuned
+systemctl enable --now podman.socket
+
+# Performance tuning
+tuned-adm profile throughput-performance
+
+# Firewall rules for Cockpit
+firewall-cmd --permanent --add-service=cockpit
+firewall-cmd --reload
 
 # 3. Development GUI
 flatpak install -y flathub io.podman_desktop.PodmanDesktop
